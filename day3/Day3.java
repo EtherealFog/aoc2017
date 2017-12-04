@@ -2,10 +2,12 @@
 import java.util.*;
 import java.io.*;
 public class Day3 {
+
+   public static final int INPUT = 265149;
+
    public static void main(String[] args) {
-      int input = 265149;
-      a(input);
-      b(input);
+      a(INPUT);
+      b(INPUT);
    }
 
    public static void a(int input) {
@@ -16,10 +18,11 @@ public class Day3 {
       if(r % 2 == 0) {
          x = -r/2 + 1;
          y = r/2;
-         if(diff < 0) {
+         if(diff <= 0) {
             x -= diff;
          } else {
-            y -= diff;
+            y -= diff - 1;
+            x--;
          }
       } else {
          x = r/2;
@@ -30,19 +33,19 @@ public class Day3 {
             y += diff;
          }
       }
-      System.out.println("x: " + x + " y: " + y);
+      //System.out.println("x: " + x + " y: " + y);
       System.out.println((Math.abs(x) + Math.abs(y)));
    }
 
    public static void b(int input) {
-      int[][] vals = new int[17][17];
+      int[][] vals = new int[11][11];
       int[][] dirs = {new int[] {1, 0},
                       new int[] {0, 1},
                       new int[] {-1, 0},
                       new int[] {0, -1}};
-      vals[9][9] = 1;
-      int x = 9;
-      int y = 9;
+      vals[5][5] = 1;
+      int x = 5;
+      int y = 5;
       int step = 1;
       while(vals[x][y] < input) {
          int dx = dirs[(step-1)%4][0];
@@ -68,7 +71,7 @@ public class Day3 {
    private static void print(int[][] vals) {
       for(int i = 0; i < vals.length; i++) {
          for(int j = 0; j < vals[i].length; j++) {
-            System.out.print(vals[i][j] + "\t");
+            System.out.print(vals[j][vals.length - i - 1] + "\t");
          }
          System.out.println();
       }
