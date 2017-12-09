@@ -23,8 +23,7 @@ public class Day8 {
       }
       System.out.println("Max Value (part A): " + max);
    }
-   //0  1   2  3  4 5  6
-   //y inc 497 if n <= 3
+ 
    public static void runB(List<String[]> code) {
       register.clear();
       max = Integer.MIN_VALUE;
