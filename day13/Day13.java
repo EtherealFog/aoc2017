@@ -37,7 +37,7 @@ public class Day13 {
       int start = 0;
       long t = System.currentTimeMillis();
       while(!safe(start)) start++;
-      //System.out.println((System.currentTimeMillis() - t)/1000.0 + " seconds");
+      System.out.println((System.currentTimeMillis() - t)/1000.0 + " seconds");
       System.out.println("First Safe Delay (Part B):\t" + start);
    }
 
@@ -54,8 +54,8 @@ public class Day13 {
 
    public boolean safe(int time) {
       for(int i = 0; i < 100; i++) {
-         int ind = i + time;
-         if(firewall[i] != null && !firewall[i].open(ind)) {
+         //int ind = i + time;
+         if(firewall[i] != null && !firewall[i].open(i + time)) {
             return false;
          } 
       }
@@ -66,11 +66,11 @@ public class Day13 {
       public int size;
 
       public Wall(int size) {
-         this.size = size;
+         this.size = (size-1) * 2;
       }
       
       public boolean open(int time) {
-         return !(time % ((size-1) * 2) == 0);
+         return !(time % size == 0);
       }
    }
 }
