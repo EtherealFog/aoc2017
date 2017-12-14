@@ -35,7 +35,9 @@ public class Day13 {
 
    public void runB() {
       int start = 0;
+      long t = System.currentTimeMillis();
       while(!safe(start)) start++;
+      //System.out.println((System.currentTimeMillis() - t)/1000.0 + " seconds");
       System.out.println("First Safe Delay (Part B):\t" + start);
    }
 
