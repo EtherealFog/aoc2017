@@ -55,4 +55,5 @@ int main () {
 
    printf("Part B Checksum: %d\n", checksum);
 
+   return 0;
 }
