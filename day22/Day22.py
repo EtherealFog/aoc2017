@@ -1,3 +1,4 @@
+import time
 dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
 def a(lines):
@@ -29,48 +30,39 @@ def a(lines):
       grid[tup] = not grid[tup]
    return count
 
-ord = {'c':'w', 'w':'i', 'i':'f', 'f':'c'}
+# {0==weak,  1==infected,  2==flagged,  3==clean}
 
 def b(lines):
-   grid = dict()
-   x = -12
-   y = 12
+   grid = [[3]*399 for x in range(399)]
+   x = 188
+   y = 212
    for line in lines:
-      x = -12
+      x = 188
       for c in line:
-         tup = (x, y)
          if c == '#':
-            grid[tup] = 'i'
-         else:
-            grid[tup] = 'c'
+            grid[x][y] = 1
          x += 1
       y -= 1
-   x = 0
-   y = 0
+   x = 200
+   y = 200
    dir = 0
    count = 0
    for i in range(10000000):
-      tup = (x, y)
-      if tup not in grid:
-         grid[tup] = 'c'
-      c = grid[tup]
-      if c == 'c':
-         dir = (dir + 3) % 4
-      elif c == 'w':
+      c = grid[x][y]
+      if c == 0:
          count += 1
-      elif c == 'i':
-         dir = (dir + 1) % 4
-      elif c == 'f':
-         dir = (dir + 2) % 4
+      dir = (dir + c) % 4
+      grid[x][y] = (c + 1) % 4
       x += dirs[dir][0]
       y += dirs[dir][1]
-      grid[tup] = ord[c]
    return count
    
 
 with open("input.txt") as f:
    lines = [x.strip() for x in f.readlines()]
+   t = time.time()
    print("Part A:", a(lines))
    print("Part B:", b(lines))
+   print("Done in:", time.time() - t)
 
    
